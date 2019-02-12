@@ -74,7 +74,6 @@ public class OrderServiceImplTest {
 
     @Test
     public void cancel() {
-
     }
 
     @Test
