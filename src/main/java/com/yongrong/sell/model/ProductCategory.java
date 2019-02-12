@@ -8,7 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.sql.Date;
+import java.util.Date;
 
 /**
  * Created by changyong on 2019/1/21.
@@ -43,8 +43,8 @@ public class ProductCategory {
         this.categoryType = categoryType;
     }
 
-    //    private Date createTime;
-//
-//    private Date updateTime;
+    private Date createTime;
+
+    private Date updateTime;
 
 }
