@@ -8,6 +8,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.ArrayList;
@@ -27,6 +31,7 @@ public class OrderServiceImplTest {
     private OrderServiceImpl orderService;
 
     private final String BUYER_OPENID = "110110";
+    private final String ORDER_ID = "1549952425682624400";
 
     @Test
     public void create() {
@@ -44,6 +49,10 @@ public class OrderServiceImplTest {
         o1.setProductQuantity(1);
         orderDetailList.add(o1);
 
+        OrderDetail o2 = new OrderDetail();
+        o2.setProductId("123457");
+        o2.setProductQuantity(10);
+        orderDetailList.add(o2);
         dto.setOrderDetailList(orderDetailList);
 
         OrderDTO orderDTO = orderService.create(dto);
@@ -52,10 +61,15 @@ public class OrderServiceImplTest {
 
     @Test
     public void findOne() {
+        OrderDTO orderDTO = orderService.findOne(ORDER_ID);
+        log.info("[查询订单] result={}", orderDTO);
     }
 
     @Test
     public void findList() {
+        PageRequest pageRequest = PageRequest.of(0, 3);
+        Page<OrderDTO> orderDTOPage = orderService.findList(BUYER_OPENID, pageRequest);
+        log.info("[查询订单列表] result={}", orderDTOPage.getContent());
     }
 
     @Test
