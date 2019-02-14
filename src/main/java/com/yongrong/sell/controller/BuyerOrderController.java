@@ -5,6 +5,7 @@ import com.yongrong.sell.dto.OrderDTO;
 import com.yongrong.sell.enums.ResultEnum;
 import com.yongrong.sell.exception.SellException;
 import com.yongrong.sell.form.OrderForm;
+import com.yongrong.sell.service.BuyerService;
 import com.yongrong.sell.service.OrderService;
 import com.yongrong.sell.utils.ResultUtils;
 import com.yongrong.sell.vo.Result;
@@ -34,6 +35,8 @@ public class BuyerOrderController {
     @Autowired
     private OrderService orderService;
 
+    @Autowired
+    private BuyerService buyerService;
 
     // 创建底单
     @PostMapping("/create")
@@ -69,6 +72,33 @@ public class BuyerOrderController {
         return ResultUtils.success(orderDTOPage.getContent());
     }
     // 订单详情
-
+    @GetMapping("/detail")
+    public Result<OrderDTO> detail(@RequestParam("openid") String openid,
+                                   @RequestParam("orderId") String orderId) {
+        if (StringUtils.isEmpty(openid)) {
+            log.error("[查询订单列表] openid为空");
+            throw new SellException(ResultEnum.PARAM_ERROR);
+        }
+        if (StringUtils.isEmpty(orderId)) {
+            log.error("[查询订单列表] orderId为空");
+            throw new SellException(ResultEnum.PARAM_ERROR);
+        }
+        OrderDTO orderDTO = buyerService.findOrderOne(openid, orderId);
+        return ResultUtils.success(orderDTO);
+    }
     // 取消订单
+    @PostMapping("/cancel")
+    public Result cancel(@RequestParam("openid") String openid,
+                         @RequestParam("orderId") String orderId) {
+        if (StringUtils.isEmpty(openid)) {
+            log.error("[查询订单列表] openid为空");
+            throw new SellException(ResultEnum.PARAM_ERROR);
+        }
+        if (StringUtils.isEmpty(orderId)) {
+            log.error("[查询订单列表] orderId为空");
+            throw new SellException(ResultEnum.PARAM_ERROR);
+        }
+        OrderDTO orderDTO = buyerService.cancelOrder(openid, orderId);
+        return ResultUtils.success();
+    }
 }

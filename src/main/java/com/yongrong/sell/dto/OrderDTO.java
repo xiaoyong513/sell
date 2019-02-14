@@ -1,5 +1,6 @@
 package com.yongrong.sell.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.yongrong.sell.enums.OrderStatusEnum;
 import com.yongrong.sell.enums.PayStatusEnum;
@@ -9,6 +10,7 @@ import lombok.Data;
 
 import javax.persistence.Id;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -16,6 +18,7 @@ import java.util.List;
  * Created by changyong on 2019/2/11.
  */
 @Data
+//@JsonInclude(JsonInclude.Include.NON_NULL)
 public class OrderDTO {
 
     /** 订单id. */
@@ -47,7 +50,7 @@ public class OrderDTO {
     private Date createTime;
 
     /** 更新时间. */
-//    @JsonSerialize(using = Date2LongSerializer.class)
+    @JsonSerialize(using = Date2LongSerializer.class)
     private Date updateTime;
 
     private List<OrderDetail> orderDetailList;
