@@ -23,6 +23,9 @@ public enum ResultEnum {
 
     CART_EMPTY(30, "购物车不能为空"),
 
+
+    WECHAT_MP_ERROR(40, "微信公众号方面的错误"),
+
     ;
 
     private Integer code;

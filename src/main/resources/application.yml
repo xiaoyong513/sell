@@ -21,3 +21,8 @@ server:
 #  path: D:\test\logger
 #  file: D:\test\logger\sell.log
 #  level: debug
+
+wechat:
+  mpAppId: qwqw
+  mpAppSecret: wqwqw
+

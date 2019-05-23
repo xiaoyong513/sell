@@ -1,7 +1,6 @@
 package com.yongrong.sell.form;
 
 import lombok.Data;
-import lombok.NonNull;
 
 import javax.validation.constraints.NotEmpty;
 
